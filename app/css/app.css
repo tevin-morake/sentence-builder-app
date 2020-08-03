@@ -1,0 +1,11 @@
+body { 
+    /* Reset css */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+    /* Stops bootstrap navbar from overlapping content */
+    padding-top: 51px; 
+    background: #333333;
+    overflow: hidden;
+}
