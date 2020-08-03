@@ -1,0 +1,25 @@
+<div class="inset sentence-bg">
+    <form>
+        <div class="form-group">
+                <label for="wordType" class="controllerText">Select an English word type :</label>
+                <select  class="form-control" ng-model="selectedWordTypeObj" ng-change="typeChanged()"  ng-options="typeObj.type for typeObj in Types">
+                    <option value="">-- Choose Type --</option>
+                </select>
+                <label class="controllerText">Seach for words to create a sentence with</label>
+                <input type="text" class="form-control" ng-model="wordType" bs-options="wordType for wordType in wordTypes"
+                    placeholder="Enter word type e.g chair, he" bs-typeahead>
+        </div>
+    </form>
+
+    <ul class="list-group" id="sentencelist-grp" style="margin-top: 10px">
+        <li ng-repeat="item in sentences | filter: searchTerm" class="list-group-item">
+            {{ item.sentence }}
+        </li>
+        
+      </ul>
+
+    <div ng-show="sentences && sentences.length === 0" class="alert alert-info" role="alert">
+        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+        You do not have any sentences. Select a type of word and build a sentence today!
+    </div>
+</div>
