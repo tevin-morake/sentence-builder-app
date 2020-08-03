@@ -5,9 +5,23 @@
                 <select  class="form-control" ng-model="selectedWordTypeObj" ng-change="typeChanged()"  ng-options="typeObj.type for typeObj in Types">
                     <option value="">-- Choose Type --</option>
                 </select>
-                <label class="controllerText">Seach for words to create a sentence with</label>
-                <input type="text" class="form-control" ng-model="wordType" bs-options="wordType for wordType in wordTypes"
-                    placeholder="Enter word type e.g chair, he" bs-typeahead>
+                <!--  -->
+                <div class="input-group" style="margin-top: 15px;">
+                    <!-- <label class="controllerText"></label> -->
+                    <select ng-disabled="!typeIsSelected" class="form-control" ng-model="selectedWordType" ng-change="wordTypeOnChange()"
+                        ng-options="wordType.word for wordType in wordTypesList">
+                        <option value="">-- Choose a word to create a sentence with --</option>
+                    </select>
+                    <div class="input-group-btn">
+                        <button ng-disabled="!selectedWordType" type="button" ng-click="addWord()" class="btn btn-success btn pull-right">Add</button>
+                    </div>
+                </div>
+                <div class="input-group" style="margin-top: 15px;" ng-show="selectedWordType">
+                    <input type="text" class="form-control" ng-model="sentenceToPost">                    
+                    <div class="input-group-btn">
+                        <button ng-disabled="!selectedWordType"  type="button" ng-click="postSentence()" class="btn btn-success btn pull-right">Submit</button>
+                    </div>
+                </div>
         </div>
     </form>
 

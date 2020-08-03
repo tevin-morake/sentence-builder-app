@@ -11,6 +11,7 @@ var sentenceBuilderApp = angular.module("sentenceBuilderApp", ["ngRoute", "ngAni
     $httpProvider.defaults.headers.post = {};
     $httpProvider.defaults.headers.put = {};
     $httpProvider.defaults.headers.patch = {};
+    $httpProvider.defaults.headers.post['Content-Type'] = 'application/json';
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
 
 

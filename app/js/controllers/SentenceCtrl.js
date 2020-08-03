@@ -1,15 +1,21 @@
-sentenceBuilderApp.controller("SentenceCtrl", function($scope,$http, $modal) {
+sentenceBuilderApp.controller("SentenceCtrl", ['$scope', '$http', '$alert', '$modal', function($scope,$http, $alert, $modal) {
     $scope.sentences =[];
+    $scope.sentence = null
     $scope.Types = [];
     $scope.wordTypesList = [];
     $scope.selectedWordTypeObj = null;
-    const URL = "https://sentencebuilder-api.herokuapp.com/api/"
+    $scope.selectedWordType = null;
+    $scope.typeIsSelected = false;
+    $scope.sentenceToPost = "";
+
+    const URL ="https://sentencebuilder-api.herokuapp.com/api/";
     
-    $scope.typeChanged = function(type){
+    $scope.typeChanged = function(){
         console.log($scope.selectedWordTypeObj);
-        // $scope.selectedWordTypeObj = type;
+        $scope.typeIsSelected = true;
         getEnglishWordTypes();
     }
+
     function getEnglishWordTypes() {
         if(!$scope.selectedWordTypeObj) return;
         var url = URL + "get/wordtypes/" + $scope.selectedWordTypeObj.type;
@@ -39,9 +45,29 @@ sentenceBuilderApp.controller("SentenceCtrl", function($scope,$http, $modal) {
             console.log(error)
         });
     }
+    
+    $scope.addWord = function(){
+        $scope.sentenceToPost += ! $scope.sentenceToPost ? $scope.selectedWordType.word : " " + $scope.selectedWordType.word;
+        $scope.sentence = "";
+    }
+
+    $scope.postSentence = function(){
+        if(!$scope.sentenceToPost) {
+            return
+        }
+        var sentence = {"sentence": $scope.sentenceToPost}
+        var url = URL + "post/sentence";
+        $http.post(url, JSON.stringify(sentence)).then(function(resp){
+            $alert( {content: 'sentence saved successfully', placement: 'top', type: 'info', keyboard: false, show: true})
+            getSentences();
+        },function(error) {
+            $alert({title: 'Error saving sentence : ', content: error, type: 'danger'});
+            console.log(error)
+        });
+    }
 
     function constructor() {
         getTypes();
     }
     constructor();
-});
+}]);
