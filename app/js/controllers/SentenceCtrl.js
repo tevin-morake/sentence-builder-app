@@ -58,10 +58,13 @@ sentenceBuilderApp.controller("SentenceCtrl", ['$scope', '$http', '$alert', '$mo
         var sentence = {"sentence": $scope.sentenceToPost}
         var url = URL + "post/sentence";
         $http.post(url, JSON.stringify(sentence)).then(function(resp){
-            $alert( {content: 'sentence saved successfully', placement: 'top', type: 'info', keyboard: false, show: true})
+            $alert( {content: 'sentence saved successfully',duration: 5, placement: 'top', type: 'success', keyboard: false, show: true})
+            $scope.sentenceToPost = "";
+            $scope.selectedWordTypeObj = "";
+            $scope.selectedWordType = "";
             getSentences();
         },function(error) {
-            $alert({title: 'Error saving sentence : ', content: error, type: 'danger'});
+            $alert({title: 'Error saving sentence : ',duration: 5, content: error, type: 'danger'});
             console.log(error)
         });
     }

@@ -15,28 +15,6 @@ body {
     margin: 15px; 
 }
 
-.splash-bg {
-    background: url("./../assets/img/splash.jpg") no-repeat center center fixed;
-    height: 100vh;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    overflow-y: auto !important  ;
-    position: relative;
-}
-
-.sentence-bg {
-    background: url("./../assets//img/sentencebg.jpg") no-repeat center center fixed;
-    height: 100vh;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    overflow-y: auto !important;
-    padding: 15px;
-}
-
 .splash-content p {
     color: #fff;
     font-weight: 800;
